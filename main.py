@@ -19,8 +19,15 @@ if not os.path.exists(table_path):
 else:
     books = pd.read_excel(table_path, index_col=0, header=0)
 
+my_cat=['Religion and Philosophy','Physics and Astronomy','Mathematics and Statistics','Intelligent Technologies and Robotics','Computer Science']
 
+print(my_cat)
+#for url, title, author, edition, isbn, category in tqdm(books[['OpenURL', 'Book Title', 'Author', 'Edition', 'Electronic ISBN', 'English Package Name']].values):
 for url, title, author, edition, isbn, category in tqdm(books[['OpenURL', 'Book Title', 'Author', 'Edition', 'Electronic ISBN', 'English Package Name']].values):
+
+    if not category in my_cat:
+        continue
+
     new_folder = create_relative_path_if_not_exist(os.path.join(folder, category))
 
     bookname = compose_bookname(title, author, edition, isbn)
